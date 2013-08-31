@@ -1,5 +1,6 @@
 group :tests do
-    guard 'shell' do
-      watch(/.*\.rb/) {|m| `bundle exec rspec` }
-    end
+  guard :rspec do
+    watch(%r{^spec/.+_spec\.rb$})
+    watch(%r{^lib/(.+)\.rb$})     { |m| "spec/#{m[1]}_spec.rb" }
+  end
 end
